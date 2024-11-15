@@ -1,9 +1,9 @@
-// src/main/java/com/example/nonograms/MainActivity.java
-
 package com.example.nonograms;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private TextView lifeTextView;
     private ToggleButton toggleButton;
+    private Button resetButton; // 리셋 버튼
     private int lives = 3; // 남은 생명 수
     private int numBlackSquares; // 총 검은 사각형의 개수
 
@@ -36,12 +37,30 @@ public class MainActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableLayout);
         lifeTextView = findViewById(R.id.lifeTextView);
         toggleButton = findViewById(R.id.toggleButton);
+        resetButton = findViewById(R.id.resetButton); // 리셋 버튼 초기화
+
+        // 리셋 버튼에 클릭 리스너 설정
+        resetButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetGame(); // 게임 리셋
+            }
+        });
 
         // 검은색 사각형 및 힌트 생성
         generateRandomBlackSquaresAndClues();
         initBoard(); // 보드 초기화
         displayClues(); // 힌트 표시
         updateLifeText(); // 생명 수 업데이트
+    }
+
+    // 게임 리셋 메서드
+    private void resetGame() {
+        lives = 3; // 생명 초기화
+        generateRandomBlackSquaresAndClues(); // 새로운 검은 사각형과 힌트 생성
+        initBoard(); // 보드 초기화
+        displayClues(); // 힌트 표시
+        updateLifeText(); // 생명 텍스트 업데이트
     }
 
     // 생명 텍스트를 업데이트
@@ -156,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 셀 클릭 리스너 클래스 정의
-    private class CellClickListener implements View.OnClickListener {
+    private class CellClickListener implements OnClickListener {
         private final Cell cell;
         private final int row;
         private final int col;

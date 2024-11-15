@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:background="#FFF3F3">
 
-    <!-- Display remaining life -->
+    <!-- 남은 생명 수를 표시하는 텍스트뷰 -->
     <TextView
         android:id="@+id/lifeTextView"
         android:layout_width="wrap_content"
@@ -17,23 +17,24 @@
         android:layout_gravity="start"
         android:paddingBottom="8dp" />
 
-    <!-- Scrollable container for clues and board -->
+    <!-- 힌트와 게임 보드를 담는 스크롤 가능한 컨테이너 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- 수평 스크롤이 가능한 컨테이너 (열 힌트와 보드 포함) -->
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!-- Container for clues and board -->
+            <!-- 힌트와 보드를 감싸는 컨테이너 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
-                <!-- Column clues above the board -->
+                <!-- 보드 위쪽에 열 힌트를 배치할 테이블 행 -->
                 <TableRow
                     android:id="@+id/columnClueRow"
                     android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
                     android:gravity="center_horizontal"
                     android:paddingBottom="8dp">
 
-                    <!-- 열 힌트를 위한 각각의 TextView를 균일하게 배치 -->
+                    <!-- 열 힌트 항목을 개별 TextView로 추가 (균일한 크기와 간격 적용) -->
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
@@ -66,11 +67,11 @@
                         android:textSize="12sp"
                         android:paddingBottom="4dp" />
 
-                    <!-- 추가 열 힌트들도 동일한 구조로 반복 -->
-                    <!-- 여기서 열 힌트 TextView의 layout_width 값을 조정하여 열 사이 간격을 맞춥니다. -->
+                    <!-- 추가 열 힌트 항목도 같은 구조로 추가 가능 -->
+                    <!-- 열 힌트 TextView의 layout_width 값을 조정하여 열 사이 간격을 맞춤 -->
                 </TableRow>
 
-                <!-- Row for Nonogram title, row clues, and main board -->
+                <!-- Nonogram 제목, 행 힌트, 메인 보드를 위한 행 -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,7 +79,7 @@
                     android:gravity="center_horizontal"
                     android:paddingRight="8dp">
 
-                    <!-- Row clues on the left side -->
+                    <!-- 행 힌트를 왼쪽에 배치하는 레이아웃 -->
                     <LinearLayout
                         android:id="@+id/rowClueContainer"
                         android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
                         android:gravity="end"
                         android:paddingRight="8dp" />
 
-                    <!-- Main board -->
+                    <!-- 메인 게임 보드 테이블 -->
                     <TableLayout
                         android:id="@+id/tableLayout"
                         android:layout_width="wrap_content"
@@ -100,7 +101,7 @@
         </HorizontalScrollView>
     </ScrollView>
 
-    <!-- Toggle Button for switching between marking black squares and X -->
+    <!-- 검은 사각형과 X 표시를 전환하는 토글 버튼 -->
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
@@ -112,6 +113,16 @@
         android:background="#8E24AA"
         android:textColor="#FFFFFF" />
 
+    <!-- 게임을 리셋하는 버튼 -->
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="383dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="Reset" />
+
+    <!-- BLACK SQUARE로 표시하는 버튼 -->
     <Button
         android:id="@+id/blackSquareButton"
         android:layout_width="match_parent"

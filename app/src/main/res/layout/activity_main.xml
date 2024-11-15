@@ -1,19 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<!-- res/layout/activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFF3F3">
 
+    <!-- Display remaining life -->
     <TextView
+        android:id="@+id/lifeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Life: 3"
+        android:textSize="18sp"
+        android:textColor="#D32F2F"
+        android:layout_gravity="start"
+        android:paddingBottom="8dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Scrollable container for clues and board -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Container for clues and board -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <!-- Column clues above the board -->
+                <TableRow
+                    android:id="@+id/columnClueRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="8dp">
+
+                    <!-- 열 힌트를 위한 각각의 TextView를 균일하게 배치 -->
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1 1 1"
+                        android:textSize="12sp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="2 3"
+                        android:textSize="12sp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1 1 1 2"
+                        android:textSize="12sp"
+                        android:paddingBottom="4dp" />
+
+                    <!-- 추가 열 힌트들도 동일한 구조로 반복 -->
+                    <!-- 여기서 열 힌트 TextView의 layout_width 값을 조정하여 열 사이 간격을 맞춥니다. -->
+                </TableRow>
+
+                <!-- Row for Nonogram title, row clues, and main board -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="8dp">
+
+                    <!-- Row clues on the left side -->
+                    <LinearLayout
+                        android:id="@+id/rowClueContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="end"
+                        android:paddingRight="8dp" />
+
+                    <!-- Main board -->
+                    <TableLayout
+                        android:id="@+id/tableLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="*"
+                        android:padding="4dp"
+                        android:background="#E0E0E0" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
+    <!-- Toggle Button for switching between marking black squares and X -->
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="Mark Black Square"
+        android:textOn="Mark X"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#8E24AA"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/blackSquareButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BLACK SQUARE"
+        android:backgroundTint="#6A1B9A"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+</LinearLayout>

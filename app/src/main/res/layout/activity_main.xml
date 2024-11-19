@@ -1,4 +1,3 @@
-<!-- res/layout/activity_main.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +5,7 @@
     android:padding="16dp"
     android:background="#FFF3F3">
 
-    <!-- 남은 생명 수를 표시하는 텍스트뷰 -->
+    <!-- Life 텍스트 -->
     <TextView
         android:id="@+id/lifeTextView"
         android:layout_width="wrap_content"
@@ -15,124 +14,77 @@
         android:textSize="18sp"
         android:textColor="#D32F2F"
         android:layout_gravity="start"
-        android:paddingBottom="8dp" />
+        android:layout_marginBottom="8dp" />
 
-    <!-- 힌트와 게임 보드를 담는 스크롤 가능한 컨테이너 -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- 수평 스크롤이 가능한 컨테이너 (열 힌트와 보드 포함) -->
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <!-- 힌트와 보드를 감싸는 컨테이너 -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-
-                <!-- 보드 위쪽에 열 힌트를 배치할 테이블 행 -->
-                <TableRow
-                    android:id="@+id/columnClueRow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="8dp">
-
-                    <!-- 열 힌트 항목을 개별 TextView로 추가 (균일한 크기와 간격 적용) -->
-                    <TextView
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1 1 1"
-                        android:textSize="12sp"
-                        android:paddingBottom="4dp" />
-
-                    <TextView
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="2 3"
-                        android:textSize="12sp"
-                        android:paddingBottom="4dp" />
-
-                    <TextView
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1 1 1 2"
-                        android:textSize="12sp"
-                        android:paddingBottom="4dp" />
-
-                    <!-- 추가 열 힌트 항목도 같은 구조로 추가 가능 -->
-                    <!-- 열 힌트 TextView의 layout_width 값을 조정하여 열 사이 간격을 맞춤 -->
-                </TableRow>
-
-                <!-- Nonogram 제목, 행 힌트, 메인 보드를 위한 행 -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="8dp">
-
-                    <!-- 행 힌트를 왼쪽에 배치하는 레이아웃 -->
-                    <LinearLayout
-                        android:id="@+id/rowClueContainer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="end"
-                        android:paddingRight="8dp" />
-
-                    <!-- 메인 게임 보드 테이블 -->
-                    <TableLayout
-                        android:id="@+id/tableLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:stretchColumns="*"
-                        android:padding="4dp"
-                        android:background="#E0E0E0" />
-                </LinearLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
-    </ScrollView>
-
-    <!-- 검은 사각형과 X 표시를 전환하는 토글 버튼 -->
-    <ToggleButton
-        android:id="@+id/toggleButton"
+    <!-- 힌트와 보드를 감싸는 컨테이너 -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOff="Mark Black Square"
-        android:textOn="Mark X"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"
-        android:background="#8E24AA"
-        android:textColor="#FFFFFF" />
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <!-- 게임을 리셋하는 버튼 -->
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="383dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:text="Reset" />
+        <!-- 행 힌트 -->
+        <LinearLayout
+            android:id="@+id/rowClueContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical">
 
-    <!-- BLACK SQUARE로 표시하는 버튼 -->
-    <Button
-        android:id="@+id/blackSquareButton"
+            <!-- 각 힌트 행이 여기에 추가됩니다 -->
+        </LinearLayout>
+
+        <!-- 보드와 열 힌트를 감싸는 컨테이너 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 열 힌트 -->
+            <TableRow
+                android:id="@+id/columnClueRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="4dp">
+
+                <!-- 각 힌트 열이 여기에 추가됩니다 -->
+            </TableRow>
+
+            <!-- 게임 보드 -->
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 버튼 섹션 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BLACK SQUARE"
-        android:backgroundTint="#6A1B9A"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif-medium"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="Mark Black Square"
+            android:textOn="Mark X"
+            android:background="#8E24AA"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:backgroundTint="#6A1B9A"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
 </LinearLayout>

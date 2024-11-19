@@ -1,22 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF3F3"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFF3F3">
+    android:padding="16dp">
 
     <!-- Life 텍스트 -->
     <TextView
         android:id="@+id/lifeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Life: 3"
-        android:textSize="18sp"
-        android:textColor="#D32F2F"
         android:layout_gravity="start"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:text="Life: 3"
+        android:textColor="#D32F2F"
+        android:textSize="18sp" />
 
-    <!-- 힌트와 보드를 감싸는 컨테이너 -->
+    <!-- 힌트와 보드 감싸는 컨테이너 -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,63 +28,65 @@
             android:id="@+id/rowClueContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:orientation="vertical">
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp" />
 
-            <!-- 각 힌트 행이 여기에 추가됩니다 -->
-        </LinearLayout>
-
-        <!-- 보드와 열 힌트를 감싸는 컨테이너 -->
+        <!-- 열 힌트와 보드 -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
             <!-- 열 힌트 -->
-            <TableRow
-                android:id="@+id/columnClueRow"
+            <LinearLayout
+                android:id="@+id/columnClueContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:layout_marginBottom="4dp">
+                android:orientation="horizontal"
+                android:padding="5dp" />
 
-                <!-- 각 힌트 열이 여기에 추가됩니다 -->
-            </TableRow>
-
-            <!-- 게임 보드 -->
+            <!-- 보드 -->
             <TableLayout
                 android:id="@+id/tableLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="2dp"
                 android:stretchColumns="*" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- 버튼 섹션 -->
     <LinearLayout
+        android:id="@+id/buttonSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal">
 
         <ToggleButton
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textOff="Mark Black Square"
-            android:textOn="Mark X"
+            android:layout_marginEnd="8dp"
             android:background="#8E24AA"
             android:textColor="#FFFFFF"
-            android:layout_marginEnd="8dp" />
+            android:textOff="Mark Black Square"
+            android:textOn="Mark X" />
 
         <Button
             android:id="@+id/resetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset"
             android:backgroundTint="#6A1B9A"
+            android:text="Reset"
             android:textColor="#FFFFFF" />
     </LinearLayout>
-
 </LinearLayout>

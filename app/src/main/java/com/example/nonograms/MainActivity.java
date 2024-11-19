@@ -131,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
 
             // TextView 속성 설정
             textView.setText(clueText.toString().trim()); // 줄바꿈 처리 후 텍스트 설정
-            textView.setTextSize(14);
-            textView.setGravity(Gravity.CENTER);
+            textView.setTextSize(16);
+            textView.setGravity(Gravity.END);
             textView.setPadding(4, 26, 4, 26);
 
             rowClueContainer.addView(textView); // 컨테이너에 추가
@@ -151,23 +151,25 @@ public class MainActivity extends AppCompatActivity {
 
             // TextView 속성 설정
             textView.setText(clueText.toString().trim()); // 줄바꿈 처리 후 텍스트 설정
-            textView.setTextSize(14);
-            textView.setGravity(Gravity.CENTER);
-            textView.setPadding(62, 4, 62, 4);
+            textView.setTextSize(16);
+            textView.setGravity(Gravity.BOTTOM);
+            textView.setPadding(65, 4, 65, 4);
 
             columnClueContainer.addView(textView); // 컨테이너에 추가
         }
     }
 
-
     private void initBoard() {
         tableLayout.removeAllViews();
+
+        int cellSize = 120; // 셀 크기를 정사각형으로 고정
 
         for (int i = 0; i < size; i++) {
             TableRow row = new TableRow(this);
             for (int j = 0; j < size; j++) {
                 Cell cell = new Cell(this, blackSquares[i][j]);
-                cell.setLayoutParams(new TableRow.LayoutParams(120, 120));
+                TableRow.LayoutParams params = new TableRow.LayoutParams(cellSize, cellSize); // 정사각형 크기 설정
+                cell.setLayoutParams(params);
                 int finalI = i, finalJ = j;
                 cell.setOnClickListener(v -> handleCellClick(cell, finalI, finalJ));
                 row.addView(cell);
@@ -176,14 +178,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 테스트용 X 표시
     private void handleCellClick(Cell cell, int row, int col) {
         if (toggleButton.isChecked()) {
             cell.toggleX();
         } else {
             if (cell.markBlackSquare()) {
                 numBlackSquares--;
-                cell.setBackgroundColor(Color.GRAY); // 클릭된 셀의 배경을 회색으로 변경
+                cell.setBackgroundResource(R.drawable.cell_pressed_shape); // 클릭된 셀의 배경을 회색으로 변경
                 if (numBlackSquares == 0) {
                     gameOver(true);
                 }

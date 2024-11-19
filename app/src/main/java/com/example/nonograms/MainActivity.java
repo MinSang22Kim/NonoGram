@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TableLayout tableLayout;
     private LinearLayout rowClueContainer;
-    private TableRow columnClueRow;
+    private LinearLayout columnClueContainer;
     private TextView lifeTextView;
     private ToggleButton toggleButton;
     private Button resetButton;
     private int lives = 3;
     private boolean[][] blackSquares;
-    private int numBlackSquares; // 남은 검은 사각형 수
+    private int numBlackSquares;
     private final int size = 5; // 보드 크기
     private ArrayList<int[]> rowClues;
     private ArrayList<int[]> colClues;
@@ -39,23 +39,26 @@ public class MainActivity extends AppCompatActivity {
         // UI 요소 초기화
         tableLayout = findViewById(R.id.tableLayout);
         rowClueContainer = findViewById(R.id.rowClueContainer);
-        columnClueRow = findViewById(R.id.columnClueRow);
+        columnClueContainer = findViewById(R.id.columnClueContainer);
         lifeTextView = findViewById(R.id.lifeTextView);
         toggleButton = findViewById(R.id.toggleButton);
         resetButton = findViewById(R.id.resetButton);
 
+        // Reset 버튼 클릭 이벤트
         resetButton.setOnClickListener(v -> resetGame());
-        resetGame(); // 초기 게임 세팅
+
+        // 초기 게임 세팅
+        resetGame();
     }
 
     private void resetGame() {
         lives = 3; // 생명 초기화
         updateLifeText();
         blackSquares = new boolean[size][size];
-        generateRandomBlackSquares();
-        generateClues();
-        displayClues();
-        initBoard();
+        generateRandomBlackSquares(); // 무작위 검은 사각형 생성
+        generateClues(); // 힌트 생성
+        displayClues(); // 힌트 UI 업데이트
+        initBoard(); // 게임 보드 초기화
     }
 
     private void generateRandomBlackSquares() {
@@ -84,12 +87,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 힌트를 생성하는 메서드
-     *
-     * @param line boolean 배열 (행 또는 열)
-     * @return 해당 라인의 힌트 배열
-     */
     private int[] makeClues(boolean[] line) {
         ArrayList<Integer> clues = new ArrayList<>();
         int count = 0;
@@ -104,15 +101,14 @@ public class MainActivity extends AppCompatActivity {
         }
         if (count > 0) clues.add(count); // 마지막 클루 추가
 
+        // 클루가 없는 경우 0 추가
+        if (clues.isEmpty()) {
+            clues.add(0);
+        }
+
         return clues.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    /**
-     * 특정 열을 추출하는 메서드
-     *
-     * @param colIndex 열 인덱스
-     * @return 해당 열의 boolean 배열
-     */
     private boolean[] getColumn(int colIndex) {
         boolean[] column = new boolean[size];
         for (int i = 0; i < size; i++) {
@@ -122,34 +118,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayClues() {
-        // 행 힌트 표시 (왼쪽 힌트)
-        rowClueContainer.removeAllViews(); // 기존의 힌트 뷰를 모두 제거
-        for (int[] rowClue : rowClues) { // 각 행의 힌트 데이터를 순회
-            TextView textView = new TextView(this); // 힌트를 표시할 TextView 생성
-            StringBuilder clueText = new StringBuilder("\n "); // 첫 번째 줄 공백 추가 (힌트를 한 칸 내리기 위해)
-            for (int clue : rowClue) { // 현재 행 힌트의 각 숫자 순회
-                clueText.append(clue).append(" "); // 힌트 숫자를 추가하고, 숫자 사이에 공백 삽입
+        // 행 힌트 표시
+        rowClueContainer.removeAllViews(); // 기존 힌트 제거
+        for (int[] rowClue : rowClues) {
+            TextView textView = new TextView(this);
+            StringBuilder clueText = new StringBuilder();
+            clueText.append("\n"); // 줄바꿈 처리
+            // 행 힌트 데이터 생성 및 줄바꿈 추가
+            for (int clue : rowClue) {
+                clueText.append(clue).append(" "); // 줄바꿈 처리
             }
-            textView.setText(clueText.toString().trim()); // 완성된 힌트 문자열을 TextView에 설정
-            textView.setTextSize(14); // 힌트 글자 크기 설정
-            textView.setGravity(Gravity.END); // 힌트를 오른쪽 정렬
-            textView.setPadding(4, 18, 4, 18); // 힌트 텍스트의 여백 설정 (왼쪽, 위, 오른쪽, 아래)
-            rowClueContainer.addView(textView); // 힌트 TextView를 행 힌트 컨테이너에 추가
+
+            // TextView 속성 설정
+            textView.setText(clueText.toString().trim()); // 줄바꿈 처리 후 텍스트 설정
+            textView.setTextSize(14);
+            textView.setGravity(Gravity.CENTER);
+            textView.setPadding(4, 26, 4, 26);
+
+            rowClueContainer.addView(textView); // 컨테이너에 추가
         }
 
-        // 열 힌트 표시 (위쪽 힌트)
-        columnClueRow.removeAllViews(); // 기존의 열 힌트 뷰를 모두 제거
-        for (int[] colClue : colClues) { // 각 열의 힌트 데이터를 순회
-            TextView textView = new TextView(this); // 힌트를 표시할 TextView 생성
-            StringBuilder clueText = new StringBuilder(); // 열 힌트를 저장할 문자열 빌더 생성
-            for (int clue : colClue) { // 현재 열 힌트의 각 숫자 순회
-                clueText.append(clue).append("\n"); // 힌트 숫자를 추가하고, 숫자 뒤에 줄바꿈 삽입
+        // 열 힌트 표시
+        columnClueContainer.removeAllViews(); // 기존 힌트 제거
+        for (int[] colClue : colClues) {
+            TextView textView = new TextView(this);
+            StringBuilder clueText = new StringBuilder();
+
+            // 열 힌트 데이터 생성 및 줄바꿈 추가
+            for (int clue : colClue) {
+                clueText.append(clue).append("\n"); // 줄바꿈 처리
             }
-            textView.setText(clueText.toString().trim()); // 완성된 힌트 문자열을 TextView에 설정
-            textView.setTextSize(14); // 힌트 글자 크기 설정
-            textView.setGravity(Gravity.CENTER); // 힌트를 중앙 정렬
-            textView.setPadding(24, 4, 24, 4); // 힌트 텍스트의 여백 설정 (왼쪽, 위, 오른쪽, 아래)
-            columnClueRow.addView(textView); // 힌트 TextView를 열 힌트 행에 추가
+
+            // TextView 속성 설정
+            textView.setText(clueText.toString().trim()); // 줄바꿈 처리 후 텍스트 설정
+            textView.setTextSize(14);
+            textView.setGravity(Gravity.CENTER);
+            textView.setPadding(62, 4, 62, 4);
+
+            columnClueContainer.addView(textView); // 컨테이너에 추가
         }
     }
 
@@ -170,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // 테스트용 X 표시
     private void handleCellClick(Cell cell, int row, int col) {
         if (toggleButton.isChecked()) {
             cell.toggleX();
@@ -183,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 lives--;
                 cell.toggleX(); // 틀렸을 때 "X" 표시
-                Toast.makeText(this, "Wrong Guess!", Toast.LENGTH_SHORT).show(); // 알림 메시지
+                Toast.makeText(this, "Wrong Guess!", Toast.LENGTH_SHORT).show();
                 updateLifeText();
                 if (lives == 0) {
                     gameOver(false);

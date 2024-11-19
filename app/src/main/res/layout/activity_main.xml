@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="38dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="5dp" />
@@ -46,10 +46,10 @@
                 android:id="@+id/columnClueContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="5dp" />
+                android:padding="7dp" />
 
             <!-- 보드 -->
             <TableLayout
@@ -63,10 +63,8 @@
 
     <!-- 버튼 섹션 -->
     <LinearLayout
-        android:id="@+id/buttonSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal">

@@ -1,12 +1,8 @@
 # NonoGram
 
-📱 Making NonoGram for Mobile Programming Project
+📱 Making NonoGram for Mobile Programming Project<br>
 
----
-
-## 🎮 What is NonoGram?
-
-숫자 힌트를 이용해 격자를 채워 완성하는 논리 퍼즐 게임
+cf. 노노그램이란? 숫자 힌트를 이용해 격자를 채워 완성하는 논리 퍼즐 게임 🎮
 
 ---
 
